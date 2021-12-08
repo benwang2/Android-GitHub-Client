@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GitHubClient</string>
+    <string name="placeholder_input">Your username here</string>
+</resources>

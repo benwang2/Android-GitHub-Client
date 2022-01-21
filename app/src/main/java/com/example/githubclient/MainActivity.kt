@@ -1,6 +1,9 @@
 package com.example.githubclient
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -22,14 +25,19 @@ class MainActivity : AppCompatActivity() {
 
         submitUsername.setOnClickListener {
             val username: String = findViewById<EditText>(R.id.githubUsername).text.toString()
-            val call = githubAPI.getFollowers(username)
-            call.enqueue(object : Callback<List<User>> {
-                override fun onFailure(call: Call<List<User>>, t: Throwable) {}
+            val call = githubAPI.getUser(username)
+            call.enqueue(object : Callback<User> {
 
-                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                override fun onFailure(call: Call<User>, t: Throwable) {
                     TODO("NOT IMPLEMENTED")
                 }
 
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    val user: User = response.body() ?: return
+                    if (user.message == ""){
+                        Toast.makeText(applicationContext, user.displayName, Toast.LENGTH_SHORT).show()
+                    }
+                }
             })
         }
 

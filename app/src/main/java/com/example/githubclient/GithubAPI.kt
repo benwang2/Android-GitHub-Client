@@ -15,6 +15,8 @@ data class Repository (
 )
 
 data class User (
+    @SerializedName("message") val message:           String,
+    
     @SerializedName("login") val username:          String,
     @SerializedName("name") val displayName:        String,
 

@@ -8,9 +8,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/cardview_dark_background"
+        android:id="@+id/profileCard"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="1dp">
 
         <ImageView
             android:id="@+id/profilePicture"
@@ -22,7 +24,184 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="profile picture"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/githubUsername"
+            app:layout_constraintTop_toBottomOf="@+id/githubUsername">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25">
+
+                <ImageView
+                    android:id="@+id/followersIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:contentDescription="followers"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_followers"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/followersLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/followersIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/followersIcon"
+                    tools:text="@string/followers" />
+
+                <TextView
+                    android:id="@+id/followersValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/followersIcon"
+                    app:layout_constraintStart_toEndOf="@+id/followersIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25">
+
+                <ImageView
+                    android:id="@+id/followingIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:contentDescription="following"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_following"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/followingLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/followingIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/followingIcon"
+                    tools:text="@string/following" />
+
+                <TextView
+                    android:id="@+id/followingValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/followingIcon"
+                    app:layout_constraintStart_toEndOf="@+id/followingIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25">
+
+                <ImageView
+                    android:id="@+id/starredIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:contentDescription="starred"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_starred"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/starredLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/starredIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/starredIcon"
+                    tools:text="@string/starred" />
+
+                <TextView
+                    android:id="@+id/starredValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/starredIcon"
+                    app:layout_constraintStart_toEndOf="@+id/starredIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25">
+
+                <ImageView
+                    android:id="@+id/reposIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:contentDescription="repos"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_repos"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/reposLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/reposIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/reposIcon"
+                    tools:text="@string/repositories" />
+
+                <TextView
+                    android:id="@+id/reposValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/reposIcon"
+                    app:layout_constraintStart_toEndOf="@+id/reposIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/githubUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            android:textColor="@android:color/secondary_text_dark"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/profilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/displayName" />
 
         <TextView
             android:id="@+id/displayName"
@@ -31,18 +210,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="TextView"
+            android:textColor="@android:color/primary_text_dark"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/profilePicture"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/githubUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="TextView"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/profilePicture"
-            app:layout_constraintTop_toBottomOf="@+id/displayName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

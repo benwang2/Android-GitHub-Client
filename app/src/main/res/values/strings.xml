@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GitHubClient</string>
     <string name="placeholder_input">Your username here</string>
+    <string name="followers">FOLLOWERS</string>
+    <string name="following">FOLLOWING</string>
+    <string name="starred">STARRED</string>
+    <string name="repositories">REPOSITORIES</string>
 </resources>

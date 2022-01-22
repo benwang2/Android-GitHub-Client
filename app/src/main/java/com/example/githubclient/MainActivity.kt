@@ -1,14 +1,11 @@
 package com.example.githubclient
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +13,26 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private val githubAPI = GithubAPI.create()
+
+    fun loadProfile(user: User){
+        val intent = Intent(this, ProfileActivity::class.java)
+        intent.apply {
+            putExtra("displayName", user.displayName)
+            putExtra("githubUsername", user.username)
+            putExtra("avatarUrl", user.avatarUrl)
+
+            putExtra("followersUrl", user.followers)
+            putExtra("followingsUrl", user.following)
+            putExtra("reposUrl",user.repos)
+
+            putExtra("numFollowers", user.numFollowers)
+            putExtra("numFollowing", user.numFollowing)
+            putExtra("numRepos",user.numRepos)
+        }
+
+        Log.d("dbg","Starting activity.")
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +51,10 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     val user: User = response.body() ?: return
-                    if (user.message == ""){
-                        Toast.makeText(applicationContext, user.displayName, Toast.LENGTH_SHORT).show()
+//                    Log.d("dbg","Message: "+user.message+" isNull=\""+(user.message=="null")+"\" isNull="+(user.message==null))
+                    if (user.message == null){
+                        Log.d("dbg","Open intents")
+                        loadProfile(user)
                     }
                 }
             })

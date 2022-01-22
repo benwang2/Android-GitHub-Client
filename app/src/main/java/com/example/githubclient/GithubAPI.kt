@@ -1,6 +1,8 @@
 package com.example.githubclient
 
 import com.google.gson.annotations.SerializedName
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,19 +17,22 @@ data class Repository (
 )
 
 data class User (
-    @SerializedName("message") val message:           String,
+    @SerializedName("message") val message: String,
     
-    @SerializedName("login") val username:          String,
-    @SerializedName("name") val displayName:        String,
+    @SerializedName("login") val username: String,
+    @SerializedName("name") val displayName: String,
     @SerializedName("avatar_url") val avatarUrl: String,
 
-    @SerializedName("followers") val numFollowers:  Int,
-    @SerializedName("following") val numFollowing:  Int,
-    @SerializedName("public_repos") val numRepos:   Int,
+    @SerializedName("email") val email: String,
+    @SerializedName("twitter_username") val twitterUsername: String,
+
+    @SerializedName("followers") val numFollowers: Int,
+    @SerializedName("following") val numFollowing: Int,
+    @SerializedName("public_repos") val numRepos: Int,
 
     @SerializedName("followers_url") val followers: String,
     @SerializedName("following_url") val following: String,
-    @SerializedName("repos_url") val repos:         String
+    @SerializedName("repos_url") val repos: String
 )
 
 interface GithubAPI {
@@ -45,14 +50,26 @@ interface GithubAPI {
     fun getRepositories(@Path("username") username: String): Call<List<Repository>>
 
     companion object {
+        val ACCESS_TOKEN = ""
         val BASE_URL = "https://api.github.com/"
 
         fun create() : GithubAPI {
+
+            val interceptor: OkHttpClient.Builder = OkHttpClient.Builder().addInterceptor {
+                val request: Request = it.request().newBuilder()
+                    .addHeader("Authorization", "token $ACCESS_TOKEN")
+                    .build()
+
+                it.proceed(request)
+            }
+
+            interceptor.build()
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
                 .build()
+
             return retrofit.create(GithubAPI::class.java)
 
         }

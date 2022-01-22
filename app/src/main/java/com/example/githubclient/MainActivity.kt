@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
             putExtra("githubUsername", user.username)
             putExtra("avatarUrl", user.avatarUrl)
 
+            putExtra("email", user.email)
+            putExtra("twitterUsername", user.twitterUsername)
+
             putExtra("followersUrl", user.followers)
             putExtra("followingsUrl", user.following)
             putExtra("reposUrl",user.repos)

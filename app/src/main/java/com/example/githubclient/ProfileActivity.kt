@@ -8,8 +8,13 @@ import android.widget.ImageView
 import android.widget.TableRow
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProfileActivity : AppCompatActivity() {
+    private val githubAPI = GithubAPI.create()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +31,8 @@ class ProfileActivity : AppCompatActivity() {
         val twitterUsername: TextView = this.findViewById(R.id.twitterUsername)
 
         displayName.text = intent.getStringExtra("displayName") ?: intent.getStringExtra("githubUsername")
-        githubUsername.text = "@"+intent.getStringExtra("githubUsername")
+        githubUsername.text = "@${intent.getStringExtra("githubUsername")}"
         Picasso.get().load(intent.getStringExtra("avatarUrl")).into(imageView)
-
-        Log.d("dbg","Email: "+intent.getStringExtra("email"))
-        Log.d("dbg","Twitter: "+intent.getStringExtra("twitterUsername"))
 
         emailRow.visibility = if (intent.getStringExtra("email") == null ) View.GONE else View.VISIBLE
         email.text = intent.getStringExtra("email")
@@ -38,6 +40,27 @@ class ProfileActivity : AppCompatActivity() {
         twitterRow.visibility = if (intent.getStringExtra("twitterUsername") == null) View.GONE else View.VISIBLE
         twitterUsername.text = intent.getStringExtra("twitterUsername")
 
+        val numFollowers: TextView = this.findViewById(R.id.followersValue)
+        val numFollowing: TextView = this.findViewById(R.id.followingValue)
+        val numStarred: TextView = this.findViewById(R.id.starredValue)
+        val numRepos: TextView = this.findViewById(R.id.reposValue)
+
+        numFollowers.text = intent.getStringExtra("numFollowers")
+        numFollowing.text = intent.getStringExtra("numFollowing")
+        numRepos.text = intent.getStringExtra("numRepos")
+
+//        val followers = githubAPI.getFollowers(intent.getStringExtra("githubUsername")!!)
+//        val following = githubAPI.getFollowing(intent.getStringExtra("githubUsername")!!)
+        val starred = githubAPI.getStarred(intent.getStringExtra("githubUsername")!!)
+//        val repositories = githubAPI.getRepositories(intent.getStringExtra("githubUsername")!!)
+
+        starred.enqueue(object : Callback<List<Repository>> {
+            override fun onFailure(call: Call<List<Repository>>, t: Throwable) = TODO("Not yet implemented")
+            override fun onResponse(
+                call: Call<List<Repository>>,
+                response: Response<List<Repository>>
+            ) = numStarred.setText(response.body()!!.size.toString() + (if (response.body()!!.size == 100) "+" else ""))
+        })
 
     }
 }

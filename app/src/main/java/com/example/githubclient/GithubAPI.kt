@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 data class Repository (
     @SerializedName("name") val name:                   String,
@@ -31,9 +32,7 @@ data class User (
     @SerializedName("public_repos") val numRepos: Int,
 
     @SerializedName("followers_url") val followers: String,
-    @SerializedName("following_url") val following: String,
-    @SerializedName("repos_url") val repos: String
-)
+    @SerializedName("following_url") val following: String, )
 
 interface GithubAPI {
 
@@ -41,13 +40,16 @@ interface GithubAPI {
     fun getUser(@Path("username") username: String): Call<User>
 
     @GET("users/{username}/followers")
-    fun getFollowers(@Path("username") username: String): Call<List<User>>
+    fun getFollowers(@Path("username") username: String, @Query("page") page: Int = 1, @Query("per_page") per_page: Int = 100): Call<List<User>>
 
     @GET("users/{username}/following")
-    fun getFollowing(@Path("username") username: String): Call<List<User>>
+    fun getFollowing(@Path("username") username: String, @Query("page") page: Int = 1, @Query("per_page") per_page: Int = 100): Call<List<User>>
 
     @GET("users/{username}/repos")
-    fun getRepositories(@Path("username") username: String): Call<List<Repository>>
+    fun getRepositories(@Path("username") username: String, @Query("page") page: Int = 1, @Query("per_page") per_page: Int = 100): Call<List<Repository>>
+
+    @GET("users/{username}/starred")
+    fun getStarred(@Path("username") username: String, @Query("page") page: Int = 1, @Query("per_page") per_page: Int = 100) : Call<List<Repository>>
 
     companion object {
         val ACCESS_TOKEN = ""

@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ViewDataBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
             putExtra("followersUrl", user.followers)
             putExtra("followingsUrl", user.following)
-            putExtra("reposUrl",user.repos)
 
             putExtra("numFollowers", user.numFollowers)
             putExtra("numFollowing", user.numFollowing)
@@ -54,7 +52,6 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     val user: User = response.body() ?: return
-//                    Log.d("dbg","Message: "+user.message+" isNull=\""+(user.message=="null")+"\" isNull="+(user.message==null))
                     if (user.message == null){
                         Log.d("dbg","Open intents")
                         loadProfile(user)

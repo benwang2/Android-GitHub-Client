@@ -21,7 +21,6 @@ class ProfileRecyclerAdapter(private val profiles: List<User>) : RecyclerView.Ad
 
 
         init {
-            // Define click listener for the ViewHolder's View.
             displayName = view.findViewById(R.id.displayName)
             githubUsername = view.findViewById(R.id.githubUsername)
             profilePicture = view.findViewById(R.id.profilePicture)
@@ -42,8 +41,13 @@ class ProfileRecyclerAdapter(private val profiles: List<User>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val profile: User = profiles[position]
 
-        holder.displayName.text = profile.displayName
-        holder.githubUsername.text = profile.username
+        if (profile.displayName == null){
+            holder.displayName.text = profile.username
+            holder.githubUsername.visibility = View.GONE
+        } else {
+            holder.displayName.text = profile.displayName
+            holder.githubUsername.text = profile.username
+        }
         Picasso.get().load(profile.avatarUrl).into(holder.profilePicture)
         holder.followers.text = profile.numFollowers.toString()
         holder.followers.text = profile.numFollowing.toString()

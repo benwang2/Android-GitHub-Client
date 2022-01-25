@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
             putExtra("followersUrl", user.followers)
             putExtra("followingsUrl", user.following)
 
-            putExtra("numFollowers", user.numFollowers)
-            putExtra("numFollowing", user.numFollowing)
-            putExtra("numRepos",user.numRepos)
+            putExtra("numFollowers", user.numFollowers.toString())
+            putExtra("numFollowing", user.numFollowing.toString())
+            putExtra("numRepos",user.numRepos.toString())
         }
 
         Log.d("dbg","Starting activity.")

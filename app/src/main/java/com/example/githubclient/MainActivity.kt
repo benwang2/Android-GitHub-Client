@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             putExtra("numRepos",user.numRepos.toString())
         }
 
-        Log.d("dbg","Starting activity.")
         startActivity(intent)
     }
 
@@ -46,16 +45,11 @@ class MainActivity : AppCompatActivity() {
             val call = githubAPI.getUser(username)
             call.enqueue(object : Callback<User> {
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    TODO("NOT IMPLEMENTED")
-                }
+                override fun onFailure(call: Call<User>, t: Throwable) = TODO("NOT IMPLEMENTED")
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     val user: User = response.body() ?: return
-                    if (user.message == null){
-                        Log.d("dbg","Open intents")
-                        loadProfile(user)
-                    }
+                    if (user.message == null) loadProfile(user)
                 }
             })
         }

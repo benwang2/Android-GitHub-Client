@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/cardview_dark_background"
+        android:id="@+id/profileCard"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repoDescription">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:paddingEnd="12dp">
+
+                <ImageView
+                    android:id="@+id/starredIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:contentDescription="@string/starred"
+                    app:layout_constraintBottom_toTopOf="@+id/starredLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_starred"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/starredLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/starred"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/starredIcon"
+                    tools:text="@string/starred" />
+
+                <TextView
+                    android:id="@+id/starredValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/starredIcon"
+                    app:layout_constraintStart_toEndOf="@+id/starredIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:paddingEnd="12dp">
+
+                <ImageView
+                    android:id="@+id/forkedIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="0.25"
+                    android:contentDescription="@string/forked"
+                    app:layout_constraintBottom_toTopOf="@+id/forkedLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_fork"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/forkedLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forked"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/forkedIcon"
+                    tools:text="@string/forked" />
+
+                <TextView
+                    android:id="@+id/forkedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toTopOf="@+id/forkedLabel"
+                    app:layout_constraintStart_toEndOf="@+id/forkedIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:paddingEnd="12dp">
+
+                <ImageView
+                    android:id="@+id/watchersIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:contentDescription="@string/watchers"
+                    app:layout_constraintBottom_toTopOf="@+id/watchersLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_watchers"
+                    app:tint="@android:color/secondary_text_dark" />
+
+                <TextView
+                    android:id="@+id/watchersLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/watchers"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/watchersIcon"
+                    tools:text="@string/watchers" />
+
+                <TextView
+                    android:id="@+id/watchersValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="5"
+                    android:textColor="@android:color/secondary_text_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/watchersIcon"
+                    app:layout_constraintStart_toEndOf="@+id/watchersIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/repoDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/secondary_text_dark"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/repoName"
+            app:layout_constraintTop_toBottomOf="@+id/repoName" />
+
+        <TextView
+            android:id="@+id/repoName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="TextView"
+            android:textColor="@android:color/primary_text_dark"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/hyperlink"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="hyperlink"
+            app:layout_constraintBottom_toBottomOf="@+id/repoName"
+            app:layout_constraintStart_toEndOf="@+id/repoName"
+            app:layout_constraintTop_toTopOf="@+id/repoName"
+            app:srcCompat="@drawable/ic_hyperlink" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

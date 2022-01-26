@@ -5,4 +5,6 @@
     <string name="following">FOLLOWING</string>
     <string name="starred">STARRED</string>
     <string name="repositories">REPOSITORIES</string>
+    <string name="watchers">WATCHERS</string>
+    <string name="forked">FORKED</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -54,27 +55,47 @@ class ProfileActivity : AppCompatActivity() {
         numFollowing.text = intent.getStringExtra("numFollowing")
         numRepos.text = intent.getStringExtra("numRepos")
 
-        val followers = githubAPI.getFollowers(intent.getStringExtra("githubUsername")!!)
-        val following = githubAPI.getFollowing(intent.getStringExtra("githubUsername")!!)
-        val starred = githubAPI.getStarred(intent.getStringExtra("githubUsername")!!)
-        val repositories = githubAPI.getRepositories(intent.getStringExtra("githubUsername")!!)
+        val starredCallback = githubAPI.getStarred(intent.getStringExtra("githubUsername")!!)
+        var starredRepos: List<Repository>
 
-        starred.enqueue(object : Callback<List<Repository>> {
+        starredCallback.enqueue(object : Callback<List<Repository>> {
             override fun onFailure(call: Call<List<Repository>>, t: Throwable) = TODO("Not yet implemented")
             override fun onResponse(
                 call: Call<List<Repository>>,
                 response: Response<List<Repository>>
-            ) = numStarred.setText(response.body()!!.size.toString() + (if (response.body()!!.size == 100) "+" else ""))
+            ) {
+                starredRepos = response.body()!!
+                numStarred.setText(response.body()!!.size.toString() + (if (response.body()!!.size == 100) "+" else ""))
+            }
         })
 
-        followers.enqueue(object: Callback<List<User>> {
+        val followersRegion: ConstraintLayout = this.findViewById(R.id.followersRegion)
+        val followersCallback = githubAPI.getFollowers(intent.getStringExtra("githubUsername")!!)
+        var followers: List<User>? = null;
+
+        followersCallback.enqueue(object: Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                val adapter = ProfileRecyclerAdapter(response.body()!!)
-                recyclerView.adapter = adapter
+                followers = response.body()!!
+                recyclerView.adapter = ProfileRecyclerAdapter(followers!!)
             }
-
             override fun onFailure(call: Call<List<User>>, t: Throwable) = TODO("Not yet implemented")
+        })
 
+        followersRegion.setOnClickListener({
+            recyclerView.adapter = ProfileRecyclerAdapter(followers!!)
+        })
+
+        val followingRegion: ConstraintLayout = this.findViewById(R.id.followingRegion)
+        val followingCallback = githubAPI.getFollowing(intent.getStringExtra("githubUsername")!!)
+        var following: List<User>? = null
+
+        followingCallback.enqueue(object: Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {following = response.body()!!}
+            override fun onFailure(call: Call<List<User>>, t: Throwable) = TODO("Not yet implemented")
+        })
+
+        followingRegion.setOnClickListener({
+            recyclerView.adapter = ProfileRecyclerAdapter(following!!)
         })
 
     }
